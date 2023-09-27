@@ -1,0 +1,327 @@
+def /filidei/init
+    /free *
+    /assets/path animations/
+    /load square
+    /load circle*
+    /load solid
+    /assets/path /home/r/work/+framespercussion-difraccions-intangible/anims-filidei/
+    /load *
+    /reload
+
+def /reload
+    /load/defs /home/r/work/+framespercussion-difraccions-intangible/filidei.osc
+    /load/defs commands/abstract.osc
+    /post/clear
+    /post ready
+
+################################################################################
+# control
+#--------------------------------------------------------------------------------
+# pedal
+#--------------------------------------------------------------------------------
+def /pedal/pressed
+     /ocell/rand
+#--------------------------------------------------------------------------------
+# midi
+#--------------------------------------------------------------------------------
+
+################################################################################
+# helpers
+#--------------------------------------------------------------------------------
+# palette
+#--------------------------------------------------------------------------------
+def /purewhite actor
+     /color $actor 1 1 1
+
+def /white actor
+     /color $actor 0.97 0.95 0.87
+
+def /black actor
+     /color $actor 0 0 0
+
+def /darkblue actor
+     /color $actor 0.05 0.08 0.09
+
+def /blue actor
+     /color $actor 0.21 0.28 0.32
+
+def /midblue actor
+    /color $actor 0.35 0.4 0.45
+
+def /lightblue actor
+    /color $actor 0.45 0.58 0.66
+
+def /yellow actor
+     /color $actor 1 0.93 0.29
+
+def /orange actor
+     /color $actor 0.91 0.63 0.2
+
+def /red actor
+     /color $actor 0.32 0.05 0.08
+
+def /darkgray actor
+     /color $actor 0.12 0.17 0.20
+
+def /lightgray actor
+     /color $actor 0.59 0.61 0.62
+
+def /green actor
+    /color $actor 0.4 0.5 0.0
+
+def /green/lt actor
+    /color $actor 0.6 0.7 0.3
+
+def /green/dk actor
+    /color $actor 0.3 0.4 0.1
+
+#--------------------------------------------------------------------------------
+# rand
+#--------------------------------------------------------------------------------
+def /rand/1 actor
+    /rand/pos $actor
+    /rand /size $actor 0.5 0.7
+    /rand /angle $actor 0 360
+
+def /rand/2 actor
+    /rand/pos $actor
+    /rand /size $actor 0.1 1
+    /rand /angle $actor 0 360
+
+################################################################################
+# props
+#-------------------------------------------------------------------------------
+# fons
+#-------------------------------------------------------------------------------
+def /fons
+    /create fons solid
+    /behind fons *
+    /fons/verd
+    /green fons
+
+#-------------------------------------------------------------------------------
+# onomatopeia
+#-------------------------------------------------------------------------------
+def /onomatopeia name anim min max
+    /create $name $anim
+    /white $name
+    /frame 0
+    /rand /angle $name -20 20
+    /rand /position/x $name $min $max
+    /rand /position/y $name $min $max
+    /rand /size $name 0.4 0.6
+    /group $name ono
+
+def /aie
+    /onomatopeia aie ono-aie-atk 0.2 0.8
+    /frame aie 0
+    /state/add aie ono-aie-atk ono-aie-loop
+    /once aie
+
+def /bum
+    /onomatopeia bum ono-bum 0.2 0.8
+    /once bum
+
+def /ding
+    /onomatopeia ding ono-ding 0.2 0.8
+    /once ding
+    /size ding 1
+
+def /eow
+    /onomatopeia eow ono-eow 0.2 0.8
+
+def /kwack
+    /onomatopeia kwack ono-kwack 0.2 0.8
+    /once kwack
+
+def /krr
+    /onomatopeia krr ono-krr 0.2 0.8
+
+def /tss
+    /onomatopeia tss ono-tss 0.2 0.8
+    /once tss
+
+def /zzz
+    /onomatopeia zzz ono-zzz-atk 0.2 0.8
+    /loop zzz
+    /state/add zzz ono-zzz-atk ono-zzz
+
+def /zzz/off
+    /anim zzz ono-zzz-rel
+    /once zzz
+
+#-------------------------------------------------------------------------------
+# protas
+#-------------------------------------------------------------------------------
+# ocell
+#-------------------------------------------------------------------------------
+def /ocell/create
+    /free ocell
+    /create ocell ocell-bg
+    /create ocell-ln ocell-ln
+    /create ocell-pota-r ocell-pota-r
+    /create ocell-pota-l ocell-pota-l
+    /create ocell-bec ocell-bec
+    /white ocell
+    /rand /position/x ocell-ln 0.495 0.485
+    /parent ocell-ln ocell
+    /parent ocell-bec ocell
+    /parent ocell-pota-r ocell
+    /parent ocell-pota-l ocell
+
+def /ocell
+    /ocell/create
+    /anim ocell ocell-bg
+    /anim ocell-ln ocell-ln
+    /loop ocell
+
+def /ocell/blob
+    /anim ocell ocell-blob-bg
+    /anim ocell-ln ocell-blob-ln
+    /once ocell
+
+def /ocell/rand
+    /rand /angle ocell* 0 360
+    /rand /position/x ocell 0.1 0.9
+    /rand /position/y ocell 0.1 0.9
+
+def /ocell/r
+    /position/x ocell-bec 0.15
+    /position/y ocell-bec 0
+    /angle ocell-bec 25
+    /rand /angle ocell-pota-r 35 45
+    /rand /angle ocell-pota-l 35 45
+
+def /ocell/up/r
+    /position/x ocell-bec 0.15
+    /position/y ocell-bec -0.2
+    /angle ocell-bec 0
+    /rand /angle ocell-pota-r 35 45
+    /rand /angle ocell-pota-l 35 45
+
+def /ocell/down/r
+    /position/x ocell-bec 0.12
+    /position/y ocell-bec 0.2
+    /angle ocell-bec 60
+    /rand /angle ocell-pota-r 35 45
+    /rand /angle ocell-pota-l 35 45
+
+def /ocell/up/l
+    /position/x ocell-bec -0.15
+    /position/y ocell-bec -0.2
+    /angle ocell-bec 0
+    /rand /angle ocell-pota-r -35 -45
+    /rand /angle ocell-pota-l -35 -45
+
+def /ocell/l
+    /position/x ocell-bec -0.2
+    /position/y ocell-bec 0
+    /angle ocell-bec 90
+    /rand /angle ocell-pota-r -35 -45
+    /rand /angle ocell-pota-l -35 -45
+
+def /ocell/down/l
+    /position/x ocell-bec -0.12
+    /position/y ocell-bec 0.2
+    /angle ocell-bec 60
+    /rand /angle ocell-pota-r -35 -45
+    /rand /angle ocell-pota-l -35 -45
+
+def /ocell/center
+    /position/x ocell-bec 0
+    /position/y ocell-bec 0
+    /angle ocell-bec 0
+    /angle ocell-pota-r 0
+    /angle ocell-pota-l 0
+
+def /ocell/up
+    /position/x ocell-bec 0
+    /position/y ocell-bec -0.2
+    /angle ocell-bec 50
+    /angle ocell-pota-r 0
+    /angle ocell-pota-l 0
+
+def /ocell/down
+    /position/x ocell-bec 0
+    /position/y ocell-bec 0.2
+    /angle ocell-bec 0
+    /angle ocell-pota-r 40
+    /angle ocell-pota-l -40
+#-------------------------------------------------------------------------------
+# peix
+#-------------------------------------------------------------------------------
+def /peix
+    /free peix
+    /create peix peix-bg
+    /create peix-ln peix-ln
+    /rand /position/x peix-ln 0.495 0.485
+    /parent peix-ln peix
+
+def /peix/mira
+    /anim peix peix-front-bg
+    /anim peix-ln peix-front-ln
+
+def /peix/balla
+    /anim peix peix-front-bg
+    /anim peix-ln peix-balla-ln
+    /state/add peix-ln peix-balla-ln peix-front-ln
+#-------------------------------------------------------------------------------
+# textures
+#-------------------------------------------------------------------------------
+def /punts
+    /create/group punts dots-1 20
+    /rand/pos punts
+    /rand /angle punts 0 360
+    /rand /speed punts 0.9 1.1
+    /rand /frame punts 0 30
+
+def /espurna
+    /create/group espurna espurna 20
+    /rand/pos espurna
+    /rand /angle espurna 0 360
+    /rand /speed espurna 0.9 1.1
+    /rand /frame espurna 0 30
+#-------------------------------------------------------------------------------
+# intro
+#-------------------------------------------------------------------------------
+def /maquiavel
+    /create maquiavel maquiavel-atk
+    /state/add maquiavel maquiavel-atk maquiavel
+    /loop maquiavel
+
+def /nono maquiavel
+    /anim maquiavel maquiavel-rel
+    /once maquiavel
+#-------------------------------------------------------------------------------
+# plantes
+#-------------------------------------------------------------------------------
+def /fulla name ln
+    /create $name fulla-bg
+    /create $ln fulla-ln
+    /rand /position/x $name 0.505 0.515
+    /parent $ln $name
+    /green/lt $name
+    /green/dk $ln
+
+def /planta name ln
+    /create $name planta-bg
+    /create $ln planta-ln
+    /rand /position/x $name 0.505 0.515
+    /parent $ln $name
+    /white $name
+
+def /plantes
+    /planta planta planta-ln
+    /planta plante plante-ln
+    /planta planti planti-ln
+    /planta planto planto-ln
+    /planta plantu plantu-ln
+    /green/lt plant?
+    /green/dk plant?-ln
+    /replanta
+
+def /replanta
+    /rand /position/x plant? 0.1 0.9
+    /rand /angle plant? -30 30
+    /rand /size/x plant? 0.9 1.1
+
