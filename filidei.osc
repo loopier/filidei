@@ -266,6 +266,52 @@ def /peix/balla
     /anim peix-ln peix-balla-ln
     /state/add peix-ln peix-balla-ln peix-front-ln
 #-------------------------------------------------------------------------------
+# extres
+#-------------------------------------------------------------------------------
+def /animal name name-a
+    /create $name $name
+    /white $name
+    /rand /position/x $name 0.2 0.8
+    /rand /position/y $name 0.2 0.8
+    /state/add $name $name-a $name
+    /choose /fliph $name , /pass
+    /rand /size $name 0.6 1
+    /rand /speed $name 0.8 1
+    /rand /angle $name -60 60
+
+def /pass
+    /post .
+
+def /tucan
+    /animal tucan tucan-a
+
+def /tucan/a
+    /anim tucan tucan-a
+
+def /senglar
+    /animal senglar senglar-a
+
+def /senglar/a
+    /anim senglar senglar-a
+
+def /puput
+    /animal puput puput-a
+
+def /puput/a
+    /anim puput puput-a
+
+def /ocell-1
+    /animal ocell-1 ocell-1-a
+
+def /ocell-1/a
+    /anim ocell-1 ocell-1-a
+
+def /ocell-2
+    /animal ocell-2 ocell-2-a
+
+def /ocell-2/a
+    /anim ocell-2 ocell-2-a
+#-------------------------------------------------------------------------------
 # textures
 #-------------------------------------------------------------------------------
 def /punts
