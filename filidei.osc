@@ -6,6 +6,7 @@ def /filidei/init
     /load solid
     /assets/path /home/r/work/+framespercussion-difraccions-intangible/anims-filidei/
     /load *
+    /window/fullscreen 1
     /reload
 
 def /reload
@@ -59,6 +60,9 @@ def /orange actor
 
 def /red actor
      /color $actor 0.32 0.05 0.08
+
+def /red/lt actor
+     /color $actor 0.42 0.05 0.08
 
 def /darkgray actor
      /color $actor 0.12 0.17 0.20
@@ -268,49 +272,64 @@ def /peix/balla
 #-------------------------------------------------------------------------------
 # extres
 #-------------------------------------------------------------------------------
-def /animal name name-a
-    /create $name $name
+def /animal name bg bg-a name-ln ln ln-a
+    /create $name $bg
+    /create $name-ln $ln
+    # offset
+    /rand /position/x $name-ln 0.495 0.485
+    /parent $name-ln $name
     /white $name
     /rand /position/x $name 0.2 0.8
     /rand /position/y $name 0.2 0.8
-    /state/add $name $name-a $name
-    /choose /fliph $name , /pass
+    /state/add $name $bg-a $bg
+    /state/add $name-ln $ln-a $ln
+    /choose /flip/animal $name $name-ln , /pass
     /rand /size $name 0.6 1
-    /rand /speed $name 0.8 1
+    /rand /speed $name 0.6 1
     /rand /angle $name -60 60
+
+def /flip/animal name ln
+    /fliph $name
+    /fliph $ln
 
 def /pass
     /post .
 
-def /tucan
-    /animal tucan tucan-a
+def /tucan name name-ln
+    /animal $name tucan-bg tucan-a-bg $name-ln tucan-ln tucan-a-ln
 
-def /tucan/a
-    /anim tucan tucan-a
+def /tucan/a name name-ln
+    /anim $name tucan-a-bg
+    /anim $name-ln tucan-a-ln
 
-def /senglar
-    /animal senglar senglar-a
+def /senglar name name-ln
+    /animal $name senglar-bg senglar-a-bg $name-ln senglar-ln senglar-a-ln
 
-def /senglar/a
-    /anim senglar senglar-a
+def /senglar/a name name-ln
+    /anim $name senglar-a-bg
+    /anim $name-ln senglar-a-ln
 
-def /puput
-    /animal puput puput-a
+def /puput name name-ln
+    /animal $name puput-bg puput-a-bg $name-ln puput-ln puput-a-ln
 
-def /puput/a
-    /anim puput puput-a
+def /puput/a name name-ln
+    /anim $name puput-a-bg
+    /anim $name-ln puput-a-ln
 
-def /ocell-1
-    /animal ocell-1 ocell-1-a
+def /ocell-1 name name-ln
+    /animal $name ocell-1-bg ocell-1-a-bg $name-ln ocell-1-ln ocell-1-a-ln
 
-def /ocell-1/a
-    /anim ocell-1 ocell-1-a
+def /ocell-1/a name name-ln
+    /anim $name ocell-1-a-bg
+    /anim $name-ln ocell-1-a-ln
 
-def /ocell-2
-    /animal ocell-2 ocell-2-a
+def /ocell-2 name name-ln
+    /animal $name ocell-2-bg ocell-2-a-bg $name-ln ocell-2-ln ocell-2-a-ln
 
-def /ocell-2/a
-    /anim ocell-2 ocell-2-a
+def /ocell-2/a name name-ln
+    /anim $name ocell-2-a-bg
+    /anim $name-2-ln ocell-2-a-ln
+
 #-------------------------------------------------------------------------------
 # textures
 #-------------------------------------------------------------------------------
@@ -338,6 +357,87 @@ def /maquiavel
 def /nono maquiavel
     /anim maquiavel maquiavel-rel
     /once maquiavel
+#-------------------------------------------------------------------------------
+# overtura - sc 1
+#-------------------------------------------------------------------------------
+def /obertura
+    /free *
+    /create bg solid
+    /red/lt bg
+    /grid
+
+def /grid
+    /senglar senglar senglar-ln
+    /tucan tucan tucan-ln
+    /puput puput puput-ln
+    /ocell-1 ocell-1 ocell-1-ln
+    /ocell-2 ocell-2 ocell-2-ln
+    /top/1 senglar
+    /top/4 tucan
+    /mid/2 puput
+    /mid/4 ocell-2
+    /bottom/3 ocell-1
+
+def /top/1 name
+    /position/x $name 0.2
+    /position/y $name 0.3
+    /size $name 0.5
+
+def /top/2 name
+    /position/x $name 0.4
+    /position/y $name 0.3
+    /size $name 0.5
+
+def /top/3 name
+    /position/x $name 0.6
+    /position/y $name 0.3
+    /size $name 0.5
+
+def /top/4 name
+    /position/x $name 0.8
+    /position/y $name 0.3
+    /size $name 0.5
+
+def /mid/1 name
+    /position/x $name 0.2
+    /position/y $name 0.5
+    /size $name 0.5
+
+def /mid/2 name
+    /position/x $name 0.4
+    /position/y $name 0.5
+    /size $name 0.5
+
+def /mid/3 name
+    /position/x $name 0.6
+    /position/y $name 0.5
+    /size $name 0.5
+
+def /mid/4 name
+    /position/x $name 0.8
+    /position/y $name 0.5
+    /size $name 0.5
+
+def /bottom/1 name
+    /position/x $name 0.2
+    /position/y $name 0.7
+    /size $name 0.5
+
+def /bottom/2 name
+    /position/x $name 0.4
+    /position/y $name 0.7
+    /size $name 0.5
+
+def /bottom/3 name
+    /position/x $name 0.6
+    /position/y $name 0.7
+    /size $name 0.5
+
+def /bottom/4 name
+    /position/x $name 0.8
+    /position/y $name 0.7
+    /size $name 0.5
+
 #-------------------------------------------------------------------------------
 # plantes
 #-------------------------------------------------------------------------------
