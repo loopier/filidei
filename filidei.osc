@@ -40,16 +40,16 @@ def /white actor
 def /black actor
      /color $actor 0 0 0
 
-def /darkblue actor
+def /blue/dk actor
      /color $actor 0.05 0.08 0.09
 
 def /blue actor
      /color $actor 0.21 0.28 0.32
 
-def /midblue actor
+def /blue/mid actor
     /color $actor 0.35 0.4 0.45
 
-def /lightblue actor
+def /blue/lt actor
     /color $actor 0.45 0.58 0.66
 
 def /yellow actor
@@ -260,6 +260,7 @@ def /peix
     /create peix-ln peix-ln
     /rand /position/x peix-ln 0.495 0.485
     /parent peix-ln peix
+    /blue peix
 
 def /peix/mira
     /anim peix peix-front-bg
@@ -278,7 +279,7 @@ def /animal name bg bg-a name-ln ln ln-a
     # offset
     /rand /position/x $name-ln 0.495 0.485
     /parent $name-ln $name
-    /white $name
+    /choose /white $name , /green/lt $name , /orange $name , /yellow $name , /red/lt $name
     /rand /position/x $name 0.2 0.8
     /rand /position/y $name 0.2 0.8
     /state/add $name $bg-a $bg
@@ -286,7 +287,7 @@ def /animal name bg bg-a name-ln ln ln-a
     /choose /flip/animal $name $name-ln , /pass
     /rand /size $name 0.6 1
     /rand /speed $name 0.6 1
-    /rand /angle $name -60 60
+    /rand /angle $name 0 360
 
 def /flip/animal name ln
     /fliph $name
@@ -301,6 +302,9 @@ def /tucan name name-ln
 def /tucan/a name name-ln
     /anim $name tucan-a-bg
     /anim $name-ln tucan-a-ln
+    /rand /angle $name 0 360
+    /choose /white $name , /green/lt $name , /orange $name , /yellow $name , /red/lt $name
+    /fade $name 1
 
 def /senglar name name-ln
     /animal $name senglar-bg senglar-a-bg $name-ln senglar-ln senglar-a-ln
@@ -308,6 +312,9 @@ def /senglar name name-ln
 def /senglar/a name name-ln
     /anim $name senglar-a-bg
     /anim $name-ln senglar-a-ln
+    /rand /angle $name 0 360
+    /choose /white $name , /green/lt $name , /orange $name , /yellow $name , /red/lt $name
+    /fade $name 1
 
 def /puput name name-ln
     /animal $name puput-bg puput-a-bg $name-ln puput-ln puput-a-ln
@@ -315,6 +322,9 @@ def /puput name name-ln
 def /puput/a name name-ln
     /anim $name puput-a-bg
     /anim $name-ln puput-a-ln
+    /rand /angle $name 0 360
+    /choose /white $name , /green/lt $name , /orange $name , /yellow $name , /red/lt $name
+    /fade $name 1
 
 def /ocell-1 name name-ln
     /animal $name ocell-1-bg ocell-1-a-bg $name-ln ocell-1-ln ocell-1-a-ln
@@ -322,13 +332,19 @@ def /ocell-1 name name-ln
 def /ocell-1/a name name-ln
     /anim $name ocell-1-a-bg
     /anim $name-ln ocell-1-a-ln
+    /rand /angle $name 0 360
+    /choose /white $name , /green/lt $name , /orange $name , /yellow $name , /red/lt $name
+    /fade $name 1
 
 def /ocell-2 name name-ln
     /animal $name ocell-2-bg ocell-2-a-bg $name-ln ocell-2-ln ocell-2-a-ln
 
 def /ocell-2/a name name-ln
     /anim $name ocell-2-a-bg
-    /anim $name-2-ln ocell-2-a-ln
+    /anim $name-ln ocell-2-a-ln
+    /rand /angle $name 0 360
+    /choose /white $name , /green/lt $name , /orange $name , /yellow $name , /red/lt $name
+    /fade $name 1
 
 #-------------------------------------------------------------------------------
 # textures
@@ -363,111 +379,120 @@ def /nono maquiavel
 def /obertura
     /free *
     /create bg solid
-    /red/lt bg
+    #/red/lt bg
     /grid
+    /fade animals 0
+    /blue *-ln
 
 def /grid
     /senglar senglar senglar-ln
+    /senglar senglar2 senglar2-ln
     /tucan tucan tucan-ln
+    /tucan tucan2 tucan2-ln
     /puput puput puput-ln
+    /puput puput2 puput2-ln
     /ocell-1 ocell-1 ocell-1-ln
+    /ocell-1 ocell-1-2 ocell-1-2-ln
     /ocell-2 ocell-2 ocell-2-ln
+    /ocell-2 ocell-2-2 ocell-2-2-ln
+    /group animals senglar
+    /group animals senglar2
+    /group animals puput
+    /group animals puput2
+    /group animals tucan
+    /group animals tucan2
+    /group animals ocell-1
+    /group animals ocell-1-2
+    /group animals ocell-2
+    /group animals ocell-2-2
+    #/rand /position/x animals 0.1 0.9
+    #/rand /position/y animals 0.1 0.9
+    /rand /size animals 0.4 0.6
+    /midi noteon 0 60 /senglar/a senglar senglar-ln
+    /midi noteon 0 62 /senglar/a senglar2 senglar2-ln
+    /midi noteon 0 64 /puput/a puput puput-ln
+    /midi noteon 0 65 /puput/a puput2 puput2-ln
+    /midi noteon 0 67 /tucan/a tucan tucan-ln
+    /midi noteon 0 69 /tucan/a tucan2 tucan2-ln
+    /midi noteon 0 71 /ocell-1/a ocell-1 ocell-1-ln
+    /midi noteon 0 72 /ocell-1/a ocell-1-2 ocell-1-2-ln
+    /midi noteon 0 74 /ocell-2/a ocell-2 ocell-2-ln
+    /midi noteon 0 76 /ocell-2/a ocell-2-2 ocell-2-2-ln
     /top/1 senglar
-    /top/4 tucan
-    /mid/2 puput
+    /top/3 tucan
+    /top/4 puput
+    /mid/1 puput2
+    /mid/2 ocell-1
     /mid/4 ocell-2
-    /bottom/3 ocell-1
+    /bottom/1 tucan2
+    /bottom/2 senglar2
+    /bottom/3 ocell-1-2
+    /bottom/4 ocell-2-2
 
 def /top/1 name
     /position/x $name 0.2
-    /position/y $name 0.3
-    /size $name 0.5
+    /position/y $name 0.25
+    #/size $name 0.5
 
 def /top/2 name
     /position/x $name 0.4
-    /position/y $name 0.3
-    /size $name 0.5
+    /position/y $name 0.25
+    #/size $name 0.5
 
 def /top/3 name
     /position/x $name 0.6
-    /position/y $name 0.3
-    /size $name 0.5
+    /position/y $name 0.25
+    #/size $name 0.5
 
 def /top/4 name
     /position/x $name 0.8
-    /position/y $name 0.3
-    /size $name 0.5
+    /position/y $name 0.25
+    #/size $name 0.5
 
 def /mid/1 name
     /position/x $name 0.2
     /position/y $name 0.5
-    /size $name 0.5
+    #/size $name 0.5
 
 def /mid/2 name
     /position/x $name 0.4
     /position/y $name 0.5
-    /size $name 0.5
+    #/size $name 0.5
 
 def /mid/3 name
     /position/x $name 0.6
     /position/y $name 0.5
-    /size $name 0.5
+    #/size $name 0.5
 
 def /mid/4 name
     /position/x $name 0.8
     /position/y $name 0.5
-    /size $name 0.5
+    #/size $name 0.5
 
 def /bottom/1 name
     /position/x $name 0.2
-    /position/y $name 0.7
-    /size $name 0.5
+    /position/y $name 0.75
+    #/size $name 0.5
 
 def /bottom/2 name
     /position/x $name 0.4
-    /position/y $name 0.7
-    /size $name 0.5
+    /position/y $name 0.75
+    #/size $name 0.5
 
 def /bottom/3 name
     /position/x $name 0.6
-    /position/y $name 0.7
-    /size $name 0.5
+    /position/y $name 0.75
+    #/size $name 0.5
 
 def /bottom/4 name
     /position/x $name 0.8
-    /position/y $name 0.7
-    /size $name 0.5
-
+    /position/y $name 0.75
+    #/size $name 0.5
 #-------------------------------------------------------------------------------
-# plantes
+# aria - sc 2
 #-------------------------------------------------------------------------------
-def /fulla name ln
-    /create $name fulla-bg
-    /create $ln fulla-ln
-    /rand /position/x $name 0.505 0.515
-    /parent $ln $name
-    /green/lt $name
-    /green/dk $ln
-
-def /planta name ln
-    /create $name planta-bg
-    /create $ln planta-ln
-    /rand /position/x $name 0.505 0.515
-    /parent $ln $name
-    /white $name
-
-def /plantes
-    /planta planta planta-ln
-    /planta plante plante-ln
-    /planta planti planti-ln
-    /planta planto planto-ln
-    /planta plantu plantu-ln
-    /green/lt plant?
-    /green/dk plant?-ln
-    /replanta
-
-def /replanta
-    /rand /position/x plant? 0.1 0.9
-    /rand /angle plant? -30 30
-    /rand /size/x plant? 0.9 1.1
-
+def /aria
+    /free *
+    /create bg solid
+    /blue/dk bg
+    /peix
