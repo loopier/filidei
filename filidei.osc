@@ -26,6 +26,7 @@ def /pedal/pressed
 # midi
 #--------------------------------------------------------------------------------
 
+
 ################################################################################
 # helpers
 #--------------------------------------------------------------------------------
@@ -259,8 +260,10 @@ def /peix
     /create peix peix-bg
     /create peix-ln peix-ln
     /rand /position/x peix-ln 0.495 0.485
+    /rand /angle peix-ln -4 4
     /parent peix-ln peix
-    /blue peix
+    /blue/lt peix
+    /blue peix-ln
 
 def /peix/mira
     /anim peix peix-front-bg
@@ -377,6 +380,7 @@ def /nono maquiavel
 # overtura - sc 1
 #-------------------------------------------------------------------------------
 def /obertura
+    /midi/free/all
     /free *
     /create bg solid
     #/red/lt bg
@@ -492,7 +496,68 @@ def /bottom/4 name
 # aria - sc 2
 #-------------------------------------------------------------------------------
 def /aria
+    /midi/free/all
     /free *
     /create bg solid
     /blue/dk bg
     /peix
+    /create/group bombolla bombolla 5
+    /midi noteon 0 60 /bombolla bombolla0
+    /midi noteon 0 62 /bombolla bombolla1
+    /midi noteon 0 64 /bombolla bombolla2
+    /midi noteon 0 65 /bombolla bombolla3
+    /midi noteon 0 67 /bombolla bombolla4
+
+def /bombolla name
+    /rand /angle $name 0 360
+    /rand /position/x $name 0.25 0.3
+    /position/y $name 0.5
+    /rand /size $name 0.3 0.4
+    /blue/mid $name
+    /rand /bombolla/float $name 2 4
+
+def /bombolla/float name speed
+    /position/y $name -0.1 $speed
+    /angle $name $speed $speed
+
+#-------------------------------------------------------------------------------
+# dueto d'amore - sc 3
+#-------------------------------------------------------------------------------
+def /dueto
+    /midi/free/all
+    /free *
+    /create bg solid
+    /orange bg
+    /ocell
+    /peix
+    /position ocell 0.7 0.3
+    /position peix 0.4 0.6
+    /yellow ocell
+    /fliph peix*
+    /create/group petons cuica 5
+    /white petons
+    /fade petons 0
+    /midi noteon 0 60 /peto petons0 0.2 1
+    /midi noteon 0 62 /peto petons1 0.2 1
+    /midi noteon 0 64 /peto petons2 0.2 1
+    /midi noteon 0 65 /peto petons3 0.2 1
+    /midi noteon 0 67 /peto petons4 0.2 1
+    /midi noteon 0 69 /peto petons5 0.2 1
+    /midi noteoff 0 60 /peto/off petons0
+    /midi noteoff 0 62 /peto/off petons1
+    /midi noteoff 0 64 /peto/off petons2
+    /midi noteoff 0 65 /peto/off petons3
+    /midi noteoff 0 67 /peto/off petons4
+    /midi noteoff 0 69 /peto/off petons5
+
+def /peto name size
+    /fade $name 1
+    /rand /angle $name 0 360
+    /size $name $size
+    /rand /position/x $name 0.1 0.9
+    /rand /position/y $name 0.1 0.9
+    /rand /angle ocell -30 30
+    /rand /angle peix  -30 30
+
+def /peto/off name
+    /fade $name 0
