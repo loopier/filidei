@@ -519,7 +519,6 @@ def /bombolla name
 def /bombolla/float name speed
     /position/y $name -0.1 $speed
     /angle $name $speed $speed
-
 #-------------------------------------------------------------------------------
 # dueto d'amore - sc 3
 #-------------------------------------------------------------------------------
@@ -561,3 +560,30 @@ def /peto name size
 
 def /peto/off name
     /fade $name 0
+#-------------------------------------------------------------------------------
+# cabaletta pescatore - sc 4
+#-------------------------------------------------------------------------------
+def /cabaletta
+    /midi/free/all
+    /free *
+    /create bg solid
+    /blue/dk bg
+    /create/group dots dots-1 40
+    /create/group espurnes espurna 40
+    /stop *
+    /rand /fade dots 0.5 1
+    /rand /fade espurnes 0.5 1
+    #/rand/pos dots*
+    #/rand/pos espurnes*
+    /rand /angle dots* 0 360
+    /rand /angle espurnes* 0 360
+    /rand /size dots* 0.5 0.7
+    /rand /size espurnes* 0.5 0.7
+    /choose /fliph espurnes , /pass
+    /choose /fliph dots , /pass
+    /blue dots
+    /blue/mid espurnes
+
+def /cabaletta/speed min max
+    /rand /speed dots $min $max
+    /rand /speed espurnes $min $max
