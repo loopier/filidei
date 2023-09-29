@@ -193,3 +193,9 @@ a.sendMsg("/recepta");
 )
 a.sendMsg("/ocell/mort");
 a.sendMsg("/peix/mort");
+a.sendMsg("/farina");
+a.sendMsg("/perdigo");
+a.sendMsg("/free", "ocell-pota-*")
+a.sendMsg("/ham");
+a.sendMsg("/passeu");
+a.sendMsg("/despres");

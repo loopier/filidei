@@ -804,9 +804,14 @@ def /recepta
     /free *
     /create bg solid
     /red bg
-    /plat
-    /plat/ocell
-    /plat/peix
+    #/plat
+    #/plat/ocell
+    #/plat/peix
+    #/mantega
+    #/farina
+    #/sal
+    #/pebre
+    #/vi
 
 def /plat
     /create plat ocell-bg
@@ -818,27 +823,131 @@ def /plat
     /stop plat*
     /white plat
     /size plat 1.3
+    /behind plat *
+    /front plat bg
 
-def /plat/ocell
+def /polla
     /ocell
     /size ocell 0.5
     /position/x ocell 0.6
     /position/y ocell 0.4
     /orange ocell
     /rand /angle ocell 0 360
+    /group ocell tot
 
-def /plat/peix
+def /mujol
     /peix
+    /orange peix
     /size peix 0.5
     /position/x peix 0.4
     /position/y peix 0.6
     /rand /angle peix 0 360
+    /group peix tot
 
-def /ocell/mort
+def /morts
+    /stop peix*
     /stop ocell*
     /center ocell-pota-*
     /position ocell-pota-l 0.0 -0.4
     /position ocell-pota-r -0.05 -0.4
 
-def /peix/mort
+def /perdigo
+    /parent/free ocell-pota-l
+    /parent/free ocell-pota-r
+    /parent/free ocell-bec
+    /free ocell-pota-l
+    /free ocell-pota-r
+    /free ocell-bec
+
+def /ham
+    /anim peix peix-ln
     /stop peix*
+
+
+def /mantega
+    /create/group mantega blob-1 5
+    /yellow mantega
+    /position/x mantega 0.8
+    /position/y mantega 0.3
+    /rand /angle mantega 0 360
+    /rand /frame mantega 0 24
+    /stop mantega
+    /size mantega 0.5
+    /group mantega tot
+
+def /farina
+    /create/group farina dots-1 20
+    /white farina
+    /stop farina
+    /rand /frame farina 0 12
+    /rand /fade farina 0.1 1
+    /rand /size farina 0.5 1
+    /rand /angle farina 0 360
+    /position/x farina 0.8
+    /position/y farina 0.8
+    /group farina tot
+
+def /sal
+    /create/group sal maraca 20
+    /white sal
+    /stop sal
+    /rand /frame sal 0 12
+    /rand /fade sal 0.1 1
+    /rand /size sal 0.1 0.3
+    /rand /angle sal 0 360
+    /position/x sal 0.2
+    /position/y sal 0.8
+    /group sal tot
+
+def /pebre
+    /create/group pebre maraca 20
+    /orange pebre
+    /stop pebre
+    /rand /frame pebre 0 12
+    /rand /fade pebre 0.1 1
+    /rand /size pebre 0.1 0.3
+    /rand /angle pebre 0 360
+    /position/x pebre 0.15
+    /position/y pebre 0.7
+    /group pebre tot
+
+def /passeu
+    /rand /position/x farina 0.4 0.6
+    /rand /position/y farina 0.4 0.6
+    /rand /position/x sal 0.4 0.6
+    /rand /position/y sal 0.4 0.6
+    /rand /position/x pebre 0.4 0.6
+    /rand /position/y pebre 0.4 0.6
+
+def /despres
+    /rand /position/x mantega 0.4 0.6
+    /rand /position/y mantega 0.4 0.6
+
+def /vi
+    /create vi peix-ln
+    /rotate vi 90
+    /white vi
+    /scale/x vi 0.7
+    /scale/y vi 0.4
+    /position/x vi 0.1
+    /position/y vi 0.3
+    /stop vi
+
+def /remeneu
+    /rand /position/x tot 0.1 0.9
+    /rand /position/y tot 0.1 0.9
+    /routine remena inf 0.1 /remena 5
+    /play *
+
+def /remena angle
+    /rotate ocell $angle
+    /rotate peix $angle
+    /rotate farina $angle
+    /rotate mantega $angle
+    /rotate sal $angle
+    /rotate pebre $angle
+
+def /emplateu-ho
+    /plat
+    /routine/free remena
+    /stop *
