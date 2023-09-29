@@ -742,3 +742,103 @@ def /aie/on name size
 
 def /aie/off name a
     /fade $name 0
+
+#-------------------------------------------------------------------------------
+# plegaria - sc 6
+#-------------------------------------------------------------------------------
+def /plegaria
+    /midi/free/all
+    /free *
+    /create bg solid
+    /blue/dk bg
+    /aquarela
+    /blue aquarela
+    /esperit ocell
+    /midi noteon 0 60 /esperit/on ocell 0.5 0.8
+    /midi noteoff 0 60 /esperit/off ocell 0.5 0.8
+
+def /aquarela
+    /create/group aquarela watercolor 20
+    /rand/pos aquarela
+    /rand /fade aquarela 0.1 1
+    /rand /frame aquarela 0 6
+    /rand /angle aquarela 0 360
+    /rand /size aquarela 0.7
+    /stop aquarela
+
+def /esperit name
+    /free ocell
+    /create $name ocell-ln
+    /create ocell-pota-r ocell-pota-r
+    /create ocell-pota-l ocell-pota-l
+    /create ocell-bec ocell-bec
+    /parent ocell-bec $name
+    /parent ocell-pota-r $name
+    /parent ocell-pota-l $name
+    /white $name
+    /white ocell*
+    /fade $name 0
+    /behind $name aquarela5
+
+def /esperit/on name size
+    /create $name ocell-ln
+    /fade $name 1 0.5
+    /rand /angle $name 0 360
+    /rand /position/x $name 0.3 0.7
+    /rand /position/y $name 0.5 0.8
+    /rand /puja $name 7 10
+    /rand /size $name 0.8 1
+    /rand /angle ocell-* 0 360
+
+def /puja name time
+    /position/y $name -0.5 $time
+
+def /esperit/off name time
+    /fade $name 0 $time
+
+#-------------------------------------------------------------------------------
+# recepta - sc 7
+#-------------------------------------------------------------------------------
+def /recepta
+    /midi/free/all
+    /free *
+    /create bg solid
+    /red bg
+    /plat
+    /plat/ocell
+    /plat/peix
+
+def /plat
+    /create plat ocell-bg
+    /create plat-ln ocell-ln
+    /create plat-ln-int ocell-ln
+    /size plat-ln-int 0.7
+    /parent plat-ln plat
+    /parent plat-ln-int plat
+    /stop plat*
+    /white plat
+    /size plat 1.3
+
+def /plat/ocell
+    /ocell
+    /size ocell 0.5
+    /position/x ocell 0.6
+    /position/y ocell 0.4
+    /orange ocell
+    /rand /angle ocell 0 360
+
+def /plat/peix
+    /peix
+    /size peix 0.5
+    /position/x peix 0.4
+    /position/y peix 0.6
+    /rand /angle peix 0 360
+
+def /ocell/mort
+    /stop ocell*
+    /center ocell-pota-*
+    /position ocell-pota-l 0.0 -0.4
+    /position ocell-pota-r -0.05 -0.4
+
+def /peix/mort
+    /stop peix*
