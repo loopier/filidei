@@ -594,6 +594,11 @@ def /cabaletta/speed min max
 def /ronda
     /midi/free/all
     /free *
+    /create bg solid
+    /green/dk bg
+    /splat
+    /pop
+    /aie
     /cuica
     /ploma
     /xiulet
@@ -605,23 +610,28 @@ def /ronda
     /midi noteon 0 60 /reclam/once ploma 0.4 1
     #/midi noteon 0 62 /reclam xiulet 0.4 1
     /midi noteon 0 62 /xiulet/on xiulet 0.4 1
-    /midi noteon 0 64 /reclam kazoo 0.4 1
-    /midi noteon 0 65 /reclam cuica 0.4 1
-    /midi noteon 0 67 /reclam blob-1 0.4 1
-    /midi noteon 0 69 /reclam blob-2 0.4 1
+    /midi noteon 0 64 /kazoo/on kazoo 0.2 1
+    /midi noteon 0 65 /reclam cuica 0.2 1
+    /midi noteon 0 67 /blob/on bloba 0.4 1
+    /midi noteon 0 69 /blob/on blobe 0.4 1
     /midi noteon 0 71 /reclam maraca 0.4 1
-    /midi noteon 0 72 /reclam guero 0.4 1
-    /midi noteon 0 74 /reclam xiulet 0.4 1
+    /midi noteon 0 72 /reclam/once guero 0.4 1
+    /midi noteon 0 74 /pop/on pop 0.1 1
+    /midi noteon 0 76 /aie/on aie 0.1 0.5
     /midi noteoff 0 62 /xiulet/off xiulet 0 1
-    /midi noteoff 0 64 /reclam kazoo 0.4 1
-    /midi noteoff 0 65 /reclam cuica 0.4 1
-    /midi noteoff 0 67 /reclam blob-1 0.4 1
-    /midi noteoff 0 69 /reclam blob-2 0.4 1
-    /midi noteoff 0 71 /reclam maraca 0.4 1
-    /midi noteoff 0 72 /reclam guero 0.4 1
-    /midi noteoff 0 74 /reclam xiulet 0.4 1
-    #/punts
-    #/ratlles
+    /midi noteoff 0 65 /cuica/off cuica 0 1
+    /midi noteoff 0 71 /maraca/off maraca 0.4 1
+    /midi noteoff 0 76 /aie/off aie 0 1
+
+def /splat
+    /create/group splat dots-1 80
+    /red splat
+    /stop splat
+    /rand /size splat 0.4 1
+    /rand /fade splat 0.1 1
+    /rand /angle splat 0 360
+    /rand /frame splat 0 24
+    /rand/pos splat
 
 def /reclam name size
     /fade $name 1
@@ -629,7 +639,7 @@ def /reclam name size
     /rand/pos $name
     /size $name $size
     /rand /angle $name 0 360
-    /speed $name 1.5
+    /speed $name 1.0
 
 def /reclam/once name size
     /reclam $name $size
@@ -640,7 +650,7 @@ def /cuica
     /state/add cuica cuica-atk cuica
     /fade cuica 0
 
-def /cuica/off
+def /cuica/off x a
     /fade cuica 0
 
 def /ploma
@@ -667,8 +677,27 @@ def /kazoo
     /create kazoo kazoo
     /fade kazoo 0
 
+def /kazoo/on name size
+    /create $name kazoo
+    /fade $name 1
+    /reclam $name $size
+    /once $name
+
 def /maraca
     /create maraca maraca
+    /fade maraca 0
+
+def /maraca/on name size
+    /create $name maraca
+    /create/group maraca-children maraca 5
+    /rand /angle maraca-children 0 360
+    /parent maraca-children $name
+    /rand /fade maraca-children 0.2 1
+    /fade $name 1
+    /reclam $name $size
+    /loop $name
+
+def /maraca/off x a
     /fade maraca 0
 
 def /guero
@@ -683,8 +712,33 @@ def /blobe
     /create blobe blob-2
     /fade blobe 0
 
-def /punts
-    /create punts dots-1
+def /blob/on name size
+    /create $name blob-1
+    /fade $name 1
+    /reclam $name $size
+    /once $name
 
-def /ratlles
-    /create ratlles espurna
+def /pop
+    /create pop ono-pop
+    /fade pop 0
+
+def /pop/on name size
+    /create $name ono-pop
+    /reclam $name $size
+    /choose /yellow $name , /orange $name
+    /once $name
+    /rand /angle pop -60 60
+
+def /aie
+    /create aie ono-aie-atk
+    /fade aie 0
+
+def /aie/on name size
+    /create $name ono-aie-atk
+    /state/add $name ono-aie-atk ono-aie-loop
+    /reclam $name $size
+    /choose /yellow $name , /orange $name
+    /rand /angle aie -60 60
+
+def /aie/off name a
+    /fade $name 0
