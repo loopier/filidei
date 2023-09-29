@@ -587,3 +587,104 @@ def /cabaletta
 def /cabaletta/speed min max
     /rand /speed dots $min $max
     /rand /speed espurnes $min $max
+
+#-------------------------------------------------------------------------------
+# ronda cacciatore - sc 5
+#-------------------------------------------------------------------------------
+def /ronda
+    /midi/free/all
+    /free *
+    /cuica
+    /ploma
+    /xiulet
+    /kazoo
+    /maraca
+    /guero
+    /bloba
+    /blobe
+    /midi noteon 0 60 /reclam/once ploma 0.4 1
+    #/midi noteon 0 62 /reclam xiulet 0.4 1
+    /midi noteon 0 62 /xiulet/on xiulet 0.4 1
+    /midi noteon 0 64 /reclam kazoo 0.4 1
+    /midi noteon 0 65 /reclam cuica 0.4 1
+    /midi noteon 0 67 /reclam blob-1 0.4 1
+    /midi noteon 0 69 /reclam blob-2 0.4 1
+    /midi noteon 0 71 /reclam maraca 0.4 1
+    /midi noteon 0 72 /reclam guero 0.4 1
+    /midi noteon 0 74 /reclam xiulet 0.4 1
+    /midi noteoff 0 62 /xiulet/off xiulet 0 1
+    /midi noteoff 0 64 /reclam kazoo 0.4 1
+    /midi noteoff 0 65 /reclam cuica 0.4 1
+    /midi noteoff 0 67 /reclam blob-1 0.4 1
+    /midi noteoff 0 69 /reclam blob-2 0.4 1
+    /midi noteoff 0 71 /reclam maraca 0.4 1
+    /midi noteoff 0 72 /reclam guero 0.4 1
+    /midi noteoff 0 74 /reclam xiulet 0.4 1
+    #/punts
+    #/ratlles
+
+def /reclam name size
+    /fade $name 1
+    /white $name
+    /rand/pos $name
+    /size $name $size
+    /rand /angle $name 0 360
+    /speed $name 1.5
+
+def /reclam/once name size
+    /reclam $name $size
+    /once $name
+
+def /cuica
+    /create cuica cuica-atk
+    /state/add cuica cuica-atk cuica
+    /fade cuica 0
+
+def /cuica/off
+    /fade cuica 0
+
+def /ploma
+    /create ploma ploma
+    /fade ploma 0
+
+def /xiulet
+    /create xiulet xiulet-atk
+    /state/add xiulet xiulet-atk xiulet
+    /fade xiulet 0
+
+def /xiulet/on name size
+    /create xiulet xiulet-atk
+    /fade xiulet 1
+    /state/add xiulet xiulet-atk xiulet
+    /reclam $name $size
+    /loop xiulet
+
+def /xiulet/off x a
+    /anim xiulet xiulet-rel
+    /once xiulet
+
+def /kazoo
+    /create kazoo kazoo
+    /fade kazoo 0
+
+def /maraca
+    /create maraca maraca
+    /fade maraca 0
+
+def /guero
+    /create guero guero
+    /fade guero 0
+
+def /bloba
+    /create bloba blob-1
+    /fade bloba 0
+
+def /blobe
+    /create blobe blob-2
+    /fade blobe 0
+
+def /punts
+    /create punts dots-1
+
+def /ratlles
+    /create ratlles espurna
